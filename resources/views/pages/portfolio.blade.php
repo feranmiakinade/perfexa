@@ -8,7 +8,7 @@
 <section class="page-hero relative min-h-[640px] overflow-hidden bg-[#111936] sm:min-h-[680px]">
 
     {{-- Hero Image Collage --}}
-    <div class="absolute inset-0 grid grid-cols-2 grid-rows-3 gap-1 sm:grid-cols-4 sm:grid-rows-4">
+    <div class="absolute inset-0 grid grid-cols-2 grid-rows-4 gap-1 sm:grid-cols-4 sm:grid-rows-4">
         @foreach ([
             'independence.jpeg',
             'octobercampaign.jpeg',
@@ -29,8 +29,8 @@
                 src="{{ asset('images/'.$portfolioImage) }}"
                 alt=""
                 aria-hidden="true"
-                class="h-full w-full object-cover {{ $loop->index >= 6 ? '!hidden sm:!block' : '' }}"
-                loading="{{ $loop->index < 6 ? 'eager' : 'lazy' }}"
+                class="h-full w-full object-cover {{ $loop->index >= 8 ? '!hidden sm:!block' : '' }}"
+                loading="{{ $loop->index < 8 ? 'eager' : 'lazy' }}"
                 @if ($loop->index === 0) fetchpriority="high" @endif
             >
         @endforeach
