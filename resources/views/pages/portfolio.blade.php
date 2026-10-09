@@ -5,10 +5,10 @@
     <main>
 
         {{-- Work Hero --}}
-<section class="page-hero relative min-h-[680px] overflow-hidden bg-[#111936]">
+<section class="page-hero relative min-h-[760px] overflow-hidden bg-[#111936] sm:min-h-[680px]">
 
     {{-- Hero Image Collage --}}
-    <div class="absolute inset-0 grid grid-cols-3 grid-rows-5 gap-1 sm:grid-cols-4 sm:grid-rows-4">
+    <div class="absolute inset-x-0 bottom-0 top-[58%] grid grid-cols-2 grid-rows-3 gap-1 sm:inset-0 sm:grid-cols-4 sm:grid-rows-4">
         @foreach ([
             'independence.jpeg',
             'octobercampaign.jpeg',
@@ -29,22 +29,23 @@
                 src="{{ asset('images/'.$portfolioImage) }}"
                 alt=""
                 aria-hidden="true"
-                class="h-full w-full object-cover"
-                loading="lazy"
+                class="h-full w-full object-cover {{ $loop->index >= 6 ? 'hidden sm:block' : '' }}"
+                loading="{{ $loop->index < 6 ? 'eager' : 'lazy' }}"
+                @if ($loop->index === 0) fetchpriority="high" @endif
             >
         @endforeach
 
         {{-- Dark overlays preserve hero text contrast --}}
-        <div class="absolute inset-0 bg-gradient-to-r from-[#081126]/95 via-[#081126]/80 to-[#081126]/25"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-[#081126]/45 via-transparent to-[#081126]/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#111936] via-[#111936]/10 to-[#111936]/30 sm:bg-gradient-to-r sm:from-[#081126]/95 sm:via-[#081126]/80 sm:to-[#081126]/25"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#081126]/35 via-transparent to-transparent sm:from-[#081126]/45 sm:to-[#081126]/20"></div>
 
     </div>
 
 
     {{-- Hero Content --}}
-    <div class="relative z-10 mx-auto flex min-h-[680px] max-w-[1440px] items-center px-6 lg:px-10">
+    <div class="relative z-10 mx-auto flex min-h-[760px] max-w-[1440px] items-start px-6 pt-10 sm:min-h-[680px] sm:items-center sm:pt-0 lg:px-10">
 
-        <div class="hero-entrance max-w-2xl py-16 lg:py-20">
+        <div class="hero-entrance max-w-2xl py-8 sm:py-16 lg:py-20">
 
             <p class="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-[#9DBBFF]">
                 Portfolio
