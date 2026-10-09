@@ -31,6 +31,10 @@ COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
+# Install Node.js and build frontend assets
+RUN apt-get update && apt-get install -y nodejs npm
+
+RUN npm install && npm run build
 
 # Set Laravel permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
