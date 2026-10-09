@@ -1,0 +1,281 @@
+@import 'tailwindcss';
+ 
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.blade.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+ 
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+ 
+    /* Brand colours become real Tailwind utilities: bg-perfexa, text-perfexa, bg-perfexa-dark */
+    --color-perfexa: #1557D6;
+    --color-perfexa-dark: #0F45AE;
+    --color-perfexa-ink: #0A0A0A;
+    --color-perfexa-grey: #F4F5F7;
+ 
+    /* Print process colours, used in the hero colour bar */
+    --color-cmyk-c: #00AEEF;
+    --color-cmyk-m: #EC008C;
+    --color-cmyk-y: #FFF200;
+}
+ 
+:root {
+    --perfexa-blue: #1557D6;
+    --perfexa-blue-dark: #0F45AE;
+    --perfexa-black: #0A0A0A;
+    --perfexa-grey: #F4F5F7;
+}
+ 
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    background: #ffffff;
+    color: var(--perfexa-black);
+}
+
+.site-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    place-items: center;
+    background: #ffffff;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 280ms ease, visibility 280ms ease;
+}
+
+.site-preloader.is-active {
+    display: grid;
+    opacity: 1;
+    visibility: visible;
+}
+
+.site-preloader.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.site-preloader-active {
+    overflow: hidden;
+}
+
+.site-preloader__content {
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+}
+
+.site-preloader__logo {
+    width: min(13rem, 60vw);
+    height: 4rem;
+    object-fit: contain;
+    animation: preloader-logo-pulse 1.6s ease-in-out infinite;
+}
+
+.site-preloader__track {
+    width: 7rem;
+    height: 2px;
+    overflow: hidden;
+    background: #e8edf5;
+}
+
+.site-preloader__track span {
+    display: block;
+    width: 45%;
+    height: 100%;
+    background: var(--perfexa-blue);
+    animation: preloader-progress 1.15s ease-in-out infinite;
+}
+
+@keyframes preloader-logo-pulse {
+    0%, 100% { opacity: 0.78; }
+    50% { opacity: 1; }
+}
+
+@keyframes preloader-progress {
+    from { transform: translateX(-110%); }
+    to { transform: translateX(230%); }
+}
+
+.hero-entrance > * {
+    animation: hero-copy-enter 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-entrance > :nth-child(1) { animation-delay: 100ms; }
+.hero-entrance > :nth-child(2) { animation-delay: 240ms; }
+.hero-entrance > :nth-child(3) { animation-delay: 380ms; }
+.hero-entrance > :nth-child(4) { animation-delay: 520ms; }
+
+.hero-media {
+    animation: hero-media-enter 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes hero-copy-enter {
+    from {
+        opacity: 0;
+        transform: translateY(32px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hero-media-enter {
+    from {
+        transform: scale(1.045);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.section-reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 900ms ease, transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.section-reveal.section-reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about-hero .btn {
+    background: #1450e6;
+    color: #fff;
+    padding: 0.9rem 1.6rem;
+    font-weight: 600;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.about-hero .btn:hover {
+    background: #0f3fc0;
+    transform: translateY(-2px);
+}
+
+.product-image-placeholder {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    background:
+        linear-gradient(135deg, rgb(21 87 214 / 0.035) 0 1px, transparent 1px 100%),
+        linear-gradient(45deg, #f8f9fb, #eef1f5);
+    background-size: 24px 24px, auto;
+}
+
+.product-placeholder-mark {
+    position: absolute;
+    width: 42%;
+    aspect-ratio: 1;
+    border: 1px solid rgb(21 87 214 / 0.12);
+    transform: rotate(45deg);
+}
+
+.product-placeholder-mark::before,
+.product-placeholder-mark::after {
+    position: absolute;
+    inset: 12%;
+    border: 1px solid rgb(21 87 214 / 0.1);
+    content: '';
+}
+
+.product-placeholder-mark::after {
+    inset: 25%;
+}
+ 
+::selection {
+    background: var(--perfexa-blue);
+    color: #ffffff;
+}
+ 
+img {
+    display: block;
+    max-width: 100%;
+}
+
+#selected-work article,
+#selected-work article > div,
+#selected-work article img {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+ 
+a {
+    text-decoration: none;
+}
+ 
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+ 
+/* Visible keyboard focus */
+:focus-visible {
+    outline: 2px solid var(--perfexa-blue);
+    outline-offset: 3px;
+}
+
+#form .contact-form-control:focus,
+#form .contact-form-control:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+#form textarea#message:focus,
+#form textarea#message:focus-visible {
+    border: 1px solid var(--perfexa-blue) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+ 
+/* Print crop marks: put .crop on a relatively positioned box */
+.crop > i {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: rgb(255 255 255 / 0.7);
+    border-style: solid;
+    border-width: 0;
+}
+.crop > i:nth-child(1) { top: -22px; left: -22px; border-right-width: 1px; border-bottom-width: 1px; }
+.crop > i:nth-child(2) { top: -22px; right: -22px; border-left-width: 1px; border-bottom-width: 1px; }
+.crop > i:nth-child(3) { bottom: -22px; left: -22px; border-right-width: 1px; border-top-width: 1px; }
+.crop > i:nth-child(4) { bottom: -22px; right: -22px; border-left-width: 1px; border-top-width: 1px; }
+ 
+/* One deliberate moment: the printed sheet lands on the page */
+@keyframes sheet-land {
+    from { opacity: 0; transform: translateY(24px) rotate(-1deg); }
+    to   { opacity: 1; transform: translateY(0) rotate(-3deg); }
+}
+.sheet-land {
+    animation: sheet-land 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .sheet-land { animation: none; transform: rotate(-3deg); }
+    .section-reveal { opacity: 1; transform: none; transition: none; }
+    .hero-entrance > *, .hero-media { animation: none; }
+    .site-preloader,
+    .site-preloader__logo,
+    .site-preloader__track span { animation: none; transition: none; }
+}
