@@ -5,10 +5,10 @@
     <main>
 
         {{-- Work Hero --}}
-<section class="page-hero relative min-h-[760px] overflow-hidden bg-[#111936] sm:min-h-[680px]">
+<section class="page-hero relative min-h-[640px] overflow-hidden bg-[#111936] sm:min-h-[680px]">
 
     {{-- Hero Image Collage --}}
-    <div class="absolute inset-x-0 bottom-0 top-[58%] grid grid-cols-2 grid-rows-3 gap-1 sm:inset-0 sm:grid-cols-4 sm:grid-rows-4">
+    <div class="absolute inset-0 grid grid-cols-2 grid-rows-3 gap-1 sm:grid-cols-4 sm:grid-rows-4">
         @foreach ([
             'independence.jpeg',
             'octobercampaign.jpeg',
@@ -29,30 +29,29 @@
                 src="{{ asset('images/'.$portfolioImage) }}"
                 alt=""
                 aria-hidden="true"
-                class="h-full w-full object-cover {{ $loop->index >= 6 ? 'hidden sm:block' : '' }}"
+                class="h-full w-full object-cover {{ $loop->index >= 6 ? '!hidden sm:!block' : '' }}"
                 loading="{{ $loop->index < 6 ? 'eager' : 'lazy' }}"
                 @if ($loop->index === 0) fetchpriority="high" @endif
             >
         @endforeach
 
         {{-- Dark overlays preserve hero text contrast --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-[#111936] via-[#111936]/10 to-[#111936]/30 sm:bg-gradient-to-r sm:from-[#081126]/95 sm:via-[#081126]/80 sm:to-[#081126]/25"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-[#081126]/35 via-transparent to-transparent sm:from-[#081126]/45 sm:to-[#081126]/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#081126]/95 via-[#081126]/80 to-[#081126]/45 sm:to-[#081126]/25"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#081126]/45 via-transparent to-[#081126]/20"></div>
 
     </div>
 
-
     {{-- Hero Content --}}
-    <div class="relative z-10 mx-auto flex min-h-[760px] max-w-[1440px] items-start px-6 pt-10 sm:min-h-[680px] sm:items-center sm:pt-0 lg:px-10">
+    <div class="relative z-10 mx-auto flex min-h-[520px] max-w-[1440px] items-start px-6 pt-10 pb-8 sm:min-h-[680px] sm:items-center sm:py-16 lg:px-10">
 
-        <div class="hero-entrance max-w-2xl py-8 sm:py-16 lg:py-20">
+        <div class="hero-entrance max-w-2xl sm:py-16 lg:py-20">
 
             <p class="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-[#9DBBFF]">
                 Portfolio
             </p>
 
             {{-- Heading --}}
-            <h1 class="max-w-3xl text-5xl font-bold leading-[0.95] tracking-[-0.06em] text-white sm:text-6xl lg:text-[4.5rem]">
+            <h1 class="max-w-3xl text-[clamp(2.875rem,12.3vw,3rem)] font-bold leading-[0.95] tracking-[-0.06em] text-white sm:text-6xl lg:text-[4.5rem]">
                 Print.
                 <br>
                 Brand.
@@ -64,14 +63,14 @@
 
 
             {{-- Description --}}
-            <p class="mt-7 max-w-xl text-base leading-8 text-white/80 sm:text-lg">
+            <p class="mt-4 max-w-xl text-base leading-6 text-white/80 sm:mt-7 sm:leading-8 sm:text-lg">
                 A selection of print, signage, branding and visual production
                 work created to help businesses show up with confidence.
             </p>
 
 
             {{-- CTA --}}
-            <div class="mt-10 flex flex-wrap items-center gap-4">
+            <div class="mt-4 flex flex-wrap items-center gap-4 sm:mt-10">
 
                 <a
                     href="{{ route('portfolio') }}#selected-work"
