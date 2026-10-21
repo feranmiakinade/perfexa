@@ -402,9 +402,9 @@
     <div class="flex items-center gap-3">
 
         <img
-            src="{{ asset('images/perfexa-logo.png') }}"
-            alt="Perfexa Media Limited"
-            class="h-12 w-auto object-contain"
+    src="{{ asset('images/perfexalogowhite.png') }}"
+    alt="Perfexa Media Limited"
+    class="h-12 w-auto object-contain"
         >
 
     </div>
