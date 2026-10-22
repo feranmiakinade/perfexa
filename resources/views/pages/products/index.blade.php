@@ -240,6 +240,17 @@
     </script>
  
  
+    {{-- Product images: read from config/products.php (matched by product slug) --}}
+    @php
+        $imageMap = [];
+        foreach (config('products.categories', []) as $cfgCategory) {
+            foreach (($cfgCategory['products'] ?? []) as $cfgSlug => $cfgProduct) {
+                if (!empty($cfgProduct['image'])) { $imageMap[$cfgSlug] = $cfgProduct['image']; }
+            }
+        }
+    @endphp
+ 
+ 
     {{-- ALL PRODUCT CATEGORIES --}}
     <div class="mx-auto max-w-[1440px] px-6 pb-16 sm:px-10 lg:px-14">
  
@@ -279,7 +290,24 @@
                 {{-- PRODUCT CARDS (swipe row on mobile, grid from sm and up) --}}
                 <div class="product-row grid grid-cols-1 gap-x-8 gap-y-14 lg:gap-x-10 lg:gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
  
-                    @foreach ($category['products'] as $product)
+                    @php
+    $withImage = [];
+    $withoutImage = [];
+
+    foreach ($category['products'] as $p) {
+        $img = $p['image'] ?? ($imageMap[$p['slug']] ?? null);
+
+        if (!empty($img)) {
+            $withImage[] = $p;
+        } else {
+            $withoutImage[] = $p;
+        }
+    }
+
+    $sortedProducts = array_merge($withImage, $withoutImage);
+@endphp
+
+@foreach ($sortedProducts as $product)
  
                         <article
                             id="{{ $product['slug'] }}"
@@ -288,9 +316,13 @@
  
                             {{-- IMAGE CARD (separate box, sits on top of the text) --}}
                             <div class="relative aspect-square w-full shrink-0 overflow-hidden rounded-lg border border-neutral-200 bg-[#E9EDF5]">
-                                @if (!empty($product['image']))
+                                @php
+                                    $image = $product['image'] ?? ($imageMap[$product['slug']] ?? null);
+                                @endphp
+ 
+                                @if (!empty($image))
                                     <img
-                                        src="{{ asset($product['image']) }}"
+                                        src="{{ asset($image) }}"
                                         alt="{{ $product['name'] }}"
                                         loading="lazy"
                                         class="h-full w-full object-cover"
@@ -360,29 +392,29 @@
     </div>
  
  
-    {{-- FINAL CALL TO ACTION --}}
+   {{-- FINAL CALL TO ACTION --}}
     <section class="bg-[#111936]">
-
+ 
         <div class="mx-auto max-w-[1440px] px-6 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
-
+ 
             <div class="flex flex-col justify-between gap-8 md:flex-row md:items-center">
-
+ 
                 <div class="max-w-2xl">
-
+ 
                     <p class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#9DBBFF]">
                         Let's work together
                     </p>
-
+ 
                     <h2 class="text-3xl font-semibold tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl">
                         Have something in mind?
                     </h2>
-
+ 
                     <p class="mt-4 max-w-xl text-sm leading-7 text-white/70 sm:text-base">
                         Tell us what you need, and let's discuss the right print or branding solution for your business.
                     </p>
-
+ 
                 </div>
-
+ 
                 <a
                     href="{{ config('contact.whatsapp_url') }}"
                     target="_blank"
@@ -392,35 +424,13 @@
                     Work With Us
                     <span aria-hidden="true">→</span>
                 </a>
-
+ 
             </div>
-
+ 
         </div>
-
+ 
     </section>
-
+ 
 </div>
- 
-{{-- Highlight the category pill for the section currently in view --}}
-<script>
-    (function () {
-        var pills = document.querySelectorAll('[data-pill]');
-        var sections = document.querySelectorAll('section[id]');
-        if (!('IntersectionObserver' in window) || !pills.length) return;
- 
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                pills.forEach(function (p) {
-                    p.dataset.active = (p.dataset.pill === entry.target.id) ? 'true' : 'false';
-                });
-            });
-        }, { rootMargin: '-30% 0px -60% 0px' });
- 
-        sections.forEach(function (s) {
-            if (document.querySelector('[data-pill="' + s.id + '"]')) observer.observe(s);
-        });
-    })();
-</script>
  
 @endsection
