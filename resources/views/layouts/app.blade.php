@@ -21,7 +21,7 @@
     <div id="site-preloader" class="site-preloader" role="status" aria-label="Loading Perfexa Media">
         <div class="site-preloader__content">
             <img
-                src="{{ asset('images/perfexa-logo.png') }}"
+                src="{{ asset('images/perfexa-logo.png') }}?v=2"
                 alt=""
                 class="site-preloader__logo"
                 fetchpriority="high"
@@ -105,7 +105,7 @@
             aria-label="Perfexa Media Limited"
         >
             <img
-                src="{{ asset('images/perfexa-logo.png') }}"
+                src="{{ asset('images/perfexa-logo.png') }}?v=2"
                 alt="Perfexa Media Limited"
                 class="h-12 w-auto object-contain"
             >
