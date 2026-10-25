@@ -113,13 +113,6 @@
         </p>
     </div>
 
-    {{-- Small image label --}}
-    <div class="absolute right-6 top-6 z-10">
-        <span class="bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-950 shadow-sm">
-            Large Format Printing
-        </span>
-    </div>
-
 </section>
 
 
