@@ -18,7 +18,9 @@ class ProductController extends Controller
                     ->map(fn ($product, $slug) => [
                         'slug' => $slug,
                         'name' => $product['name'],
-                        'description' => $product['description'],
+                        'description' => $product['description'] ?? '',
+                        'image' => $product['image'] ?? null,
+                        'images' => $product['images'] ?? [],
                     ])
                     ->values()
                     ->all(),

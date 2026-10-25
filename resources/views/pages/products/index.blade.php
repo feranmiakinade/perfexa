@@ -243,14 +243,47 @@
     {{-- Product images: read from config/products.php (matched by product slug) --}}
     @php
         $imageMap = [];
+        $imageListMap = [];
+
         foreach (config('products.categories', []) as $cfgCategory) {
             foreach (($cfgCategory['products'] ?? []) as $cfgSlug => $cfgProduct) {
-                if (!empty($cfgProduct['image'])) { $imageMap[$cfgSlug] = $cfgProduct['image']; }
+                if (!empty($cfgProduct['image'])) {
+                    $imageMap[$cfgSlug] = $cfgProduct['image'];
+                }
+
+                if (!empty($cfgProduct['images']) && is_array($cfgProduct['images'])) {
+                    $imageListMap[$cfgSlug] = array_values(array_filter($cfgProduct['images']));
+                } elseif (!empty($cfgProduct['image'])) {
+                    $imageListMap[$cfgSlug] = [$cfgProduct['image']];
+                }
             }
         }
     @endphp
  
- 
+    {{-- Automatically rotate through each product's configured images --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('[data-product-carousel]').forEach(function (carousel) {
+                var images = Array.from(carousel.querySelectorAll('[data-carousel-image]'));
+
+                if (images.length <= 1) return;
+
+                var currentIndex = 0;
+                var interval = Number(carousel.dataset.interval) || 2000;
+
+                window.setInterval(function () {
+                    images[currentIndex].classList.remove('opacity-100');
+                    images[currentIndex].classList.add('opacity-0');
+
+                    currentIndex = (currentIndex + 1) % images.length;
+
+                    images[currentIndex].classList.remove('opacity-0');
+                    images[currentIndex].classList.add('opacity-100');
+                }, interval);
+            });
+        });
+    </script>
+
     {{-- ALL PRODUCT CATEGORIES --}}
     <div class="mx-auto max-w-[1440px] px-6 pb-16 sm:px-10 lg:px-14">
  
@@ -295,9 +328,10 @@
     $withoutImage = [];
 
     foreach ($category['products'] as $p) {
+        $productImages = $p['images'] ?? ($imageListMap[$p['slug']] ?? []);
         $img = $p['image'] ?? ($imageMap[$p['slug']] ?? null);
 
-        if (!empty($img)) {
+        if (!empty($productImages) || !empty($img)) {
             $withImage[] = $p;
         } else {
             $withoutImage[] = $p;
@@ -314,21 +348,37 @@
                             class="scroll-mt-28 flex flex-col"
                         >
  
-                            {{-- IMAGE CARD (separate box, sits on top of the text) --}}
-                            <div class="relative aspect-square w-full shrink-0 overflow-hidden rounded-lg border border-neutral-200 bg-[#E9EDF5]">
+                            {{-- IMAGE CARD: consistent portrait frame on mobile, tablet and desktop --}}
+                            <div class="relative w-full shrink-0 overflow-hidden rounded-lg border border-neutral-200 bg-[#E9EDF5]" style="aspect-ratio: 4 / 5;">
                                 @php
-                                    $image = $product['image'] ?? ($imageMap[$product['slug']] ?? null);
+                                    $images = $product['images'] ?? ($imageListMap[$product['slug']] ?? []);
+
+                                    if (empty($images)) {
+                                        $singleImage = $product['image'] ?? ($imageMap[$product['slug']] ?? null);
+                                        $images = !empty($singleImage) ? [$singleImage] : [];
+                                    }
+
+                                    if (!is_array($images)) {
+                                        $images = [$images];
+                                    }
+
+                                    $images = array_values(array_filter($images));
                                 @endphp
- 
-                                @if (!empty($image))
-                                    <img
-                                        src="{{ asset($image) }}"
-                                        alt="{{ $product['name'] }}"
-                                        loading="lazy"
-                                        class="h-full w-full object-cover"
-                                    >
+
+                                @if (count($images))
+                                    <div class="absolute inset-0" data-product-carousel data-interval="2000">
+                                        @foreach ($images as $imageIndex => $image)
+                                            <img
+                                                src="{{ asset($image) }}"
+                                                alt="{{ $product['name'] }}"
+                                                loading="{{ $imageIndex === 0 ? 'eager' : 'lazy' }}"
+                                                class="absolute inset-0 h-full w-full object-cover transition-opacity duration-500 {{ $imageIndex === 0 ? 'opacity-100' : 'opacity-0' }}"
+                                                data-carousel-image
+                                            >
+                                        @endforeach
+                                    </div>
                                 @else
-                                    <div class="flex h-full w-full items-center justify-center text-[#B4BED2]">
+                                    <div class="absolute inset-0 flex h-full w-full items-center justify-center text-[#B4BED2]">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                                             <rect x="3" y="4" width="18" height="16" rx="2"/>
                                             <circle cx="9" cy="10" r="1.6"/>
@@ -336,17 +386,17 @@
                                         </svg>
                                     </div>
                                 @endif
- 
-                                {{-- MOBILE ONLY: counter + previous / next arrows --}}
+
+                                {{-- Existing mobile counter and previous / next product buttons preserved --}}
                                 @if ($loop->count > 1)
                                     <span class="product-counter" aria-hidden="true">{{ $loop->iteration }} / {{ $loop->count }}</span>
- 
+
                                     @unless ($loop->first)
                                         <button type="button" class="product-arrow product-arrow-prev" data-dir="-1" aria-label="Previous product">
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
                                         </button>
                                     @endunless
- 
+
                                     @unless ($loop->last)
                                         <button type="button" class="product-arrow product-arrow-next" data-dir="1" aria-label="Next product">
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
@@ -354,7 +404,7 @@
                                     @endunless
                                 @endif
                             </div>
- 
+
                             {{-- CARD BODY --}}
                             <div class="flex flex-1 flex-col pt-3">
  
