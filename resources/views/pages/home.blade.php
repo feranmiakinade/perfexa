@@ -267,7 +267,6 @@
 
         @php
             $recentProjects = [
-                ['image' => 'birthdaylargeformatprinting.png', 'alt' => 'Birthday large format print', 'category' => 'Large Format Printing', 'title' => 'Birthday Large Format Print'],
                 ['image' => 'birthdaypilliowspromotionalbrandedmaterials.png', 'alt' => 'Birthday promotional branded pillows', 'category' => 'Promotional & Branded Materials', 'title' => 'Birthday Branded Pillows'],
                 ['image' => 'birthdaypromotionalandbrandin.png', 'alt' => 'Birthday promotional branding', 'category' => 'Promotional & Branded Materials', 'title' => 'Birthday Promotional Branding'],
                 ['image' => 'glowinglamppromotionalandbrandingmaterials.png', 'alt' => 'Glowing lamp promotional branding', 'category' => 'Signage & Branding', 'title' => 'Glowing Lamp Branding'],

@@ -52,11 +52,6 @@ return [
             'name' => 'Digital & Commercial Printing',
             'description' => 'Commercial print products for business communication, marketing, and stationery.',
             'products' => [
-                'business-cards' => [
-                    'name' => 'Business cards',
-                    'description' => 'Printed cards for professional business introductions.',
-                    'images' => [],
-                ],
                 'flyers-leaflets' => [
                     'name' => 'Flyers and leaflets',
                     'description' => 'Printed flyers and leaflets for promotions, events, and announcements.',
@@ -67,35 +62,10 @@ return [
                     'description' => 'Printed brochures and company profile materials.',
                     'images' => ['images/BrochuresA.jpeg', 'images/BrochuresB.jpeg', 'images/BrochuresC.jpeg'],
                 ],
-                'letterheads-envelopes' => [
-                    'name' => 'Letterheads and envelopes',
-                    'description' => 'Branded stationery for professional correspondence.',
-                    'images' => [],
-                ],
-                'id-cards' => [
-                    'name' => 'ID cards',
-                    'description' => 'Printed identification cards for staff, members, and events.',
-                    'images' => [],
-                ],
-                'certificates-event-programmes' => [
-                    'name' => 'Certificates and event programmes',
-                    'description' => 'Printed certificates and event programme materials.',
-                    'images' => ['images/custom-printed-event-booklets.jpeg'],
-                ],
-                'invitations-announcement-cards' => [
-                    'name' => 'Invitations and announcement cards',
-                    'description' => 'Printed invitations and announcement cards for special occasions and events.',
-                    'images' => [],
-                ],
                 'notepads-stationery' => [
                     'name' => 'Notepads and stationery',
                     'description' => 'Branded stationery and writing materials.',
-                    'images' => ['images/custom-branded-notebooks.jpeg', 'images/custom-branded-executive-diary.jpeg'],
-                ],
-                'exercise-books-book-covers' => [
-                    'name' => 'Exercise books and book covers',
-                    'description' => 'Printed exercise books and book-cover materials.',
-                    'images' => [],
+                    'images' => ['images/custom-branded-notebooks.jpeg', 'images/custom-branded-executive-diary.jpeg','images/custom-printed-event-booklets.jpeg',],
                 ],
             ],
         ],
@@ -133,15 +103,7 @@ return [
                     'description' => 'Printed graphics for glass doors, windows, and storefronts.',
                     'images' => [
                         'images/windowsgraphicsA.jpeg',
-                        'images/windowsgraphicsB.jpeg',
-                        'images/windowsgraphicsC.jpeg',
-                        'images/windowsgraphicsD.jpeg',
                     ],
-                ],
-                'directional-wayfinding-signs' => [
-                    'name' => 'Directional and wayfinding signs',
-                    'description' => 'Signs that guide visitors through buildings and locations.',
-                    'images' => [],
                 ],
                 'custom-sign-fabrication-installation' => [
                     'name' => 'Custom sign fabrication and installation',
@@ -162,7 +124,7 @@ return [
                 'self-adhesive-vinyl-printing' => [
                     'name' => 'Self-adhesive vinyl (SAV) printing',
                     'description' => 'Printed self-adhesive vinyl graphics for glass and other suitable surfaces.',
-                    'images' => ['images/windowsgraphicsA.jpeg', 'images/windowsgraphicsB.jpeg', 'images/windowsgraphicsC.jpeg', 'images/windowsgraphicsD.jpeg'],
+                    'images' => ['images/windowsgraphicsA.jpeg',],
 
                 ],
                 'posters-promotional-graphics' => [
@@ -184,11 +146,6 @@ return [
                     'name' => 'Roll-up banner printing',
                     'description' => 'Portable printed banners for exhibitions, presentations, and events.',
                     'images' => ['images/custom-roll-up-banners.jpeg', 'images/custom-roll-up-banner.jpeg', 'images/custom-food-promotion-roll-up-banner.jpeg'],
-                ],
-                'billboard-advertising-graphics' => [
-                    'name' => 'Billboard advertising graphics',
-                    'description' => 'Large-scale graphics for outdoor advertising placements.',
-                    'images' => [],
                 ],
             ],
         ],

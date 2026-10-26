@@ -14,7 +14,6 @@
             'octobercampaign.jpeg',
             'serviceweek.jpeg',
             'lightup9japackagingandlabels.png',
-            'birthdaylargeformatprinting.png',
             'birthdaypilliowspromotionalbrandedmaterials.png',
             'ripplesstitchessignageandbranding.png',
             'glowinglamppromotionalandbrandingmaterials.png',
@@ -177,12 +176,6 @@
 
                     @php
                         $additionalProjects = [
-                            [
-                                'image' => 'birthdaylargeformatprinting.png',
-                                'alt' => 'Birthday large format print',
-                                'category' => 'Large Format Printing',
-                                'title' => 'Birthday Large Format Print',
-                            ],
                             [
                                 'image' => 'birthdaypilliowspromotionalbrandedmaterials.png',
                                 'alt' => 'Birthday promotional branded pillows',
