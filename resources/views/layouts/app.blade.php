@@ -4,16 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'Perfexa Media Limited')</title>
+<title>@yield('title', 'Perfexa Media Limited')</title>
 
-    <meta
-        name="description"
-        content="@yield('description', 'Perfexa Media Limited — Print, Design and Branding Solutions.')"
-    >
+<meta
+    name="description"
+    content="@yield('description', 'Perfexa Media Limited — Print, Design and Branding Solutions.')"
+>
+
+    {{-- WhatsApp and social media link previews --}}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Perfexa Media Limited">
+    <meta property="og:title" content="@yield('title', 'Perfexa Media Limited')">
+    <meta property="og:description" content="@yield('description', 'Print, design and branding solutions built to help businesses show up professionally.')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/perfexa-logo.png') }}">
+    <meta property="og:image:alt" content="Perfexa Media Limited logo">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="@yield('title', 'Perfexa Media Limited')">
+    <meta name="twitter:description" content="@yield('description', 'Print, design and branding solutions built to help businesses show up professionally.')">
+    <meta name="twitter:image" content="{{ asset('images/perfexa-logo.png') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    @stack('styles')
+
 </head>
 
 <body class="bg-white text-neutral-950 antialiased">

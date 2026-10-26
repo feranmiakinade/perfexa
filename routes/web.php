@@ -11,15 +11,13 @@ Route::get('/portfolio', function () {
     return view('pages.portfolio');
 })->name('portfolio');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products', [ProductController::class, 'index'])
+    ->name('products.index');
 
 Route::get('/contact', function () {
-    return redirect()->away(config('contact.whatsapp_url'));
+    return view('pages.contact');
 })->name('contact');
 
 Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->name('contact');
