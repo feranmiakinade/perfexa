@@ -9,7 +9,25 @@ class ProductController extends Controller
 {
     public function index(): View
     {
-        $categories = collect(config('products.categories'))
+        $categories = $this->getCategories();
+
+        return view('pages.products.index', compact('categories'));
+    }
+
+    public function showCategory(string $slug): View
+    {
+        $categories = collect($this->getCategories());
+
+        $category = $categories->firstWhere('slug', $slug);
+
+        abort_if(!$category, 404);
+
+        return view('pages.products.category', compact('category'));
+    }
+
+    private function getCategories(): array
+    {
+        return collect(config('products.categories'))
             ->map(fn ($category) => [
                 'name' => $category['name'],
                 'slug' => Str::slug($category['name']),
@@ -27,8 +45,6 @@ class ProductController extends Controller
             ])
             ->values()
             ->all();
-
-        return view('pages.products.index', compact('categories'));
     }
 
     private function categoryPurpose(string $category): string

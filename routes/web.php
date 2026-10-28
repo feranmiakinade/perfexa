@@ -21,3 +21,6 @@ Route::get('/contact', function () {
 Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
+
+Route::get('/products/{slug}', [ProductController::class, 'showCategory'])
+    ->name('products.category');

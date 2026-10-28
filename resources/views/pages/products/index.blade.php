@@ -309,14 +309,13 @@
                         @endif
                     </div>
  
-                    <a
-                        href="{{ $category['url'] ?? config('contact.whatsapp_url') }}"
-                        @unless (!empty($category['url'])) target="_blank" rel="noopener noreferrer" @endunless
+                        <a
+                        href="{{ route('products.category', ['slug' => $category['slug']]) }}"
                         class="mt-1 inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[#1557D6] transition hover:text-[#0F45AE]"
-                    >
+                        >
                         View All →
                     </a>
- 
+                    
                 </div>
  
  
