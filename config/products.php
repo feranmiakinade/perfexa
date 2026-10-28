@@ -11,11 +11,7 @@ return [
                     'description' => 'Visual branding for offices and workplace environments.',
                     'images' => ['images/custom-office-wall-branding.jpeg', 'images/custom-office-wall-graphics.jpeg'],
                 ],
-                'glass-partition-branding' => [
-                    'name' => 'Glass partition branding',
-                    'description' => 'Graphics and branding applied to glass partitions.',
-                    'images' => ['images/custom-glass-office-sign.jpeg'],
-                ],
+                
                 'wall-branding-graphics' => [
                     'name' => 'Wall branding and graphics',
                     'description' => 'Branded wall graphics for offices and commercial spaces.',
@@ -74,9 +70,16 @@ return [
             'description' => 'Custom indoor, outdoor, illuminated, and directional signage.',
             'products' => [
                 'indoor-outdoor-signs' => [
-                    'name' => 'Indoor and outdoor signs',
-                    'description' => 'Signs for interior spaces and outdoor business locations.',
-                    'images' => ['images/custom-pylon-signage.jpeg', 'images/custom-house-number-sign.jpeg'],
+    'name' => 'Indoor and outdoor signs',
+    'description' => 'Signs for interior spaces and outdoor business locations.',
+    'images' => [
+        'images/custom-pylon-signage.jpeg',
+        'images/custom-house-number-sign.jpeg',
+        'images/customhousenumberB.jpeg',
+        'images/customhousenumberC.jpeg',
+        'images/customhousenumberD.jpeg',
+        'images/customhousenumberE.jpeg',
+],
                 ],
                 'illuminated-logo-signs' => [
                     'name' => 'Illuminated logo signs',
@@ -91,7 +94,7 @@ return [
                 'reception-office-signs' => [
                     'name' => 'Reception and office signs',
                     'description' => 'Signage for reception areas, offices, and workplace identification.',
-                    'images' => ['images/custom-glass-office-sign.jpeg', 'images/custom-house-number-sign.jpeg'],
+                    'images' => ['images/custom-glass-office-sign.jpeg',],
                 ],
                 '3d-lettering-acrylic-signs' => [
                     'name' => '3D lettering and acrylic signs',
